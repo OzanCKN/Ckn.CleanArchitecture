@@ -1,10 +1,11 @@
 ﻿namespace Ckn.Application.Users.Commands;
 
+using Ckn.Application.Abstractions.Messaging;
 using Ckn.Domain.Common;
 using Ckn.Domain.Entities;
 using Ckn.Domain.ValueObjects;
 
-public class CreateUserCommandHandler
+public class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, Guid>
 {
     private readonly DomainEventDispatcher _domainEventDispatcher;
 
