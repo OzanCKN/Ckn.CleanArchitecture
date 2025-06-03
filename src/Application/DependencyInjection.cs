@@ -12,7 +12,8 @@ public static class DependencyInjection
     {
         // Event handler'ları otomatik veya manuel ekle
         services.AddScoped<IDomainEventHandler<UserCreatedEvent>, UserCreatedEventHandler>();
-        services.AddScoped<CreateUserCommandHandler>();  
+        services.AddScoped<CreateUserCommandHandler>();
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly));
 
         // Diğer Application servisleri...
         services.AddScoped<DomainEventDispatcher>();
