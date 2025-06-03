@@ -1,23 +1,37 @@
 namespace Ckn.Api.Controllers;
 
-using Ckn.  Application.Users.Commands;
+using Application.Users.Queries.GetUserDetail;
+using Ckn.Application.Users.Commands;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("api/[controller]")]
 public class UserController : ControllerBase
 {
-    private readonly CreateUserCommandHandler _createUserCommandHandler;
+    private readonly IMediator _mediator;
 
-    public UserController(CreateUserCommandHandler createUserCommandHandler)
+    public UserController(IMediator mediator)
     {
-        _createUserCommandHandler = createUserCommandHandler;
+        _mediator = mediator;
     }
 
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateUserCommand command, CancellationToken cancellationToken)
     {
-        var userId = await _createUserCommandHandler.Handle(command, cancellationToken);
+        var userId = await _mediator.Send(command, cancellationToken);
+
         return CreatedAtAction(nameof(Create), new { id = userId }, userId);
+    }
+
+    [Authorize]
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetUser(Guid id, CancellationToken cancellationToken)
+    {
+        var user = await _mediator.Send(new GetUserDetailQuery(id), cancellationToken);
+        if (user == null)
+            return NotFound();
+        return Ok(user);
     }
 }

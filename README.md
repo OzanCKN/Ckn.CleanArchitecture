@@ -1,6 +1,4 @@
-﻿# Ckn
-
-## Proje Amacı / Project Purpose
+﻿## Proje Amacı / Project Purpose
 
 **Türkçe:**  
 Bu proje, kullanıcı yönetimi ve alanlar arası mesajlaşma altyapısı sağlayan, .NET 9 tabanlı bir uygulama iskeletidir. Temel amaç, komut/sorgu işleyicileri, domain event yönetimi ve birimsel çalışma (Unit of Work) desenlerini kullanarak ölçeklenebilir ve sürdürülebilir bir yazılım mimarisi sunmaktır.
