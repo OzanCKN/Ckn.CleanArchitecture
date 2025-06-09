@@ -1,6 +1,8 @@
-﻿// src/Application/Abstractions/Messaging/IQuery.cs
+﻿using MediatR;
+using Ckn.Application.Common.Results;
+
 namespace Ckn.Application.Abstractions.Messaging;
 
-using MediatR;
-
-public interface IQuery<out TResponse> : IRequest<TResponse> { }
+public interface IQuery<TResponse> : IRequest<Result<TResponse>>
+{
+}

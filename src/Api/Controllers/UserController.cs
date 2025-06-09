@@ -1,7 +1,6 @@
 namespace Ckn.Api.Controllers;
-
-using Application.Users.Queries.GetUserDetail;
-using Ckn.Application.Users.Commands;
+using Ckn.Application.Users.Commands.CreateUser;
+using Ckn.Application.Users.Queries.GetUserDetail;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

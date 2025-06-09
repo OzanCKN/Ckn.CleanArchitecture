@@ -1,10 +1,11 @@
 ﻿using Ckn.Application.Abstractions.Messaging;
+using Ckn.Application.Common.Results;
 
 namespace Ckn.Application.Users.Queries.GetUserDetail;
 
 internal class GetUserDetailQueryHandler : IQueryHandler<GetUserDetailQuery, GetUserDetailResponse>
 {
-    public async Task<GetUserDetailResponse> Handle(GetUserDetailQuery request, CancellationToken cancellationToken)
+    public async Task<Result<GetUserDetailResponse>> Handle(GetUserDetailQuery request, CancellationToken cancellationToken)
     {
         // Example data
         var response = new GetUserDetailResponse
@@ -15,6 +16,6 @@ internal class GetUserDetailQueryHandler : IQueryHandler<GetUserDetailQuery, Get
             FullName = "Test User"
         };
 
-        return response;
+        return Result<GetUserDetailResponse>.Success(response);
     }
 }

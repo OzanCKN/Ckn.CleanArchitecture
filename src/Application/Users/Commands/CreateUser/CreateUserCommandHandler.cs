@@ -1,6 +1,7 @@
-﻿namespace Ckn.Application.Users.Commands;
+﻿namespace Ckn.Application.Users.Commands.CreateUser;
 
 using Ckn.Application.Abstractions.Messaging;
+using Ckn.Application.Common.Results;
 using Ckn.Domain.Common;
 using Ckn.Domain.Entities;
 using Ckn.Domain.ValueObjects;
@@ -14,7 +15,7 @@ public class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, Guid>
         _domainEventDispatcher = domainEventDispatcher;
     }
 
-    public async Task<Guid> Handle(CreateUserCommand command, CancellationToken cancellationToken)
+    public async Task<Result<Guid>> Handle(CreateUserCommand command, CancellationToken cancellationToken)
     {
         var email = new Email(command.Email);
         var user = User.Create(
@@ -35,6 +36,6 @@ public class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, Guid>
         await _domainEventDispatcher.DispatchAsync(user.DomainEvents, cancellationToken);
         user.ClearDomainEvents();
 
-        return user.Id;
+        return Result<Guid>.Success(user.Id);
     }
 }

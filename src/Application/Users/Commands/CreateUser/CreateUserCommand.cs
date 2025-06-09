@@ -1,4 +1,4 @@
-﻿namespace Ckn.Application.Users.Commands;
+﻿namespace Ckn.Application.Users.Commands.CreateUser;
 
 using Ckn.Application.Abstractions.Messaging;
 using Ckn.Domain.Enums;

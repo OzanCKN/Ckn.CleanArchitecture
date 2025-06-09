@@ -2,10 +2,9 @@
 using Ckn.Application;
 using Ckn.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Scalar.AspNetCore;
-using System.Text; // Eklendi
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,7 +50,12 @@ app.MapScalarApiReference(opt =>
     opt
         .WithTitle("Carva Api Documentation")
         .WithTheme(ScalarTheme.Kepler)
-        .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient);
+        .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient)
+        .AddPreferredSecuritySchemes("BearerAuth")
+        .AddHttpAuthentication("BearerAuth", auth =>
+        {
+            auth.Token = "";
+        });
 });
 
 app.UseAuthentication();
