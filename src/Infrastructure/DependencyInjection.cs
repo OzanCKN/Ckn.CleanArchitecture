@@ -11,6 +11,8 @@ public static class DependencyInjection
         // Örneğin: DbContext, dış servis adapteları event bus cache vs.
         // services.AddDbContext<AppDbContext>(...);
         // services.AddScoped<IEmailSender, SmtpEmailSender>();
+        services.AddHttpContextAccessor();
+        services.AddScoped<IUserContext, UserContext>();
 
         services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 

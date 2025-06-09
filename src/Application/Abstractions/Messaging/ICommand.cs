@@ -1,5 +1,8 @@
-﻿namespace Ckn.Application.Abstractions.Messaging;
+﻿using MediatR;
+using Ckn.Application.Common.Results;
 
-using MediatR;
+namespace Ckn.Application.Abstractions.Messaging;
 
-public interface ICommand<out TResponse> : IRequest<TResponse> { }
+public interface ICommand<TResponse> : IRequest<Result<TResponse>>
+{
+}
