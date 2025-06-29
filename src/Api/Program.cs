@@ -14,7 +14,7 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services
     .AddApplication()
-    .AddInfrastructure()
+    .AddInfrastructure(builder.Configuration)
     .AddWebApi();
 
 
@@ -37,7 +37,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 
-
+string apiName = builder.Configuration.GetValue("ApiName", "Api");
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -48,7 +48,7 @@ if (app.Environment.IsDevelopment())
 app.MapScalarApiReference(opt =>
 {
     opt
-        .WithTitle("Carva Api Documentation")
+        .WithTitle(apiName)
         .WithTheme(ScalarTheme.Kepler)
         .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient)
         .AddPreferredSecuritySchemes("BearerAuth")
